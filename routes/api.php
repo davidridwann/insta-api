@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,10 @@ Route::middleware('auth:api')->group( function () {
     // comment
     Route::prefix('comment')->group(function () {
         Route::post('store', [CommentController::class, 'doComment']);
+    });
+
+    // like
+    Route::prefix('like')->group(function () {
+        Route::post('store/{id}', [LikeController::class, 'store']);
     });
 });
