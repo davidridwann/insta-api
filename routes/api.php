@@ -37,6 +37,7 @@ Route::middleware('auth:api')->group( function () {
     // comment
     Route::prefix('comment')->group(function () {
         Route::post('store', [CommentController::class, 'doComment']);
+        Route::get('get/{id}', [CommentController::class, 'getComment']);
     });
 
     // like

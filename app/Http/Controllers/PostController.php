@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Like;
+use App\Models\Comment;
 use App\Models\Follow;
 use Auth;
 
@@ -128,9 +129,9 @@ class PostController extends Controller
                 ], 404);
             }
 
-            if (empty($image)) {
-                $file_name = strtotime(Carbon::now()) . '.' . $file->getClientOriginalExtension();
-                $file->move('post', $file_name);
+            if ($image) {
+                $file_name = strtotime(Carbon::now()) . '.' . $image->getClientOriginalExtension();
+                $image->move('post', $file_name);
                 $input['post'] = 'post/'. $file_name;
             } else {
                 $currentData = Post::where('id', $id)->first();
